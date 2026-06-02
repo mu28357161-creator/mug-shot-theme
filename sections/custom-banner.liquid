@@ -1,0 +1,153 @@
+<div class="custom-mug-banners-section">
+  <div class="mug-banners-grid">
+    
+    {%- for block in section.blocks -%}
+      <div class="single-mug-card" {{ block.shopify_attributes }}>
+        <div class="mug-image-wrapper">
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.product_title }}" class="mug-hover-img" loading="lazy">
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'mug-placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        <div class="mug-btn-wrapper">
+          <a href="{{ block.settings.button_link }}" class="mug-hover-btn">
+            <span class="mug-dynamic-title">{{ block.settings.product_title }}</span>
+            <span class="mug-shop-now-text">Shop Now</span>
+          </a>
+        </div>
+      </div>
+    {%- endfor -%}
+
+  </div>
+</div>
+
+<style>
+/* تھیم کے باقی حصوں سے الگ رکھنے کے لیے مخصوص کلاسز */
+.custom-mug-banners-section {
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  clear: both; /* تاکہ ہیڈر پر کوئی اثر نہ پڑے */
+}
+
+.mug-banners-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* صرف 2 امیجز ایک لائن میں */
+  gap: 30px; /* کارڈز کے درمیان کا فاصلہ */
+}
+
+@media (max-width: 768px) {
+  .mug-banners-grid {
+    grid-template-columns: 1fr; /* موبائل پر ایک کے نیچے ایک */
+  }
+}
+
+.single-mug-card {
+  position: relative !important; /* صرف اس کارڈ کے اندر پوزیشن سیٹ ہوگی */
+  overflow: hidden;
+  width: 100%;
+}
+
+.mug-image-wrapper {
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 1 / 1;
+}
+
+.mug-hover-img, .mug-placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  display: block;
+}
+
+.single-mug-card:hover .mug-hover-img {
+  transform: scale(1.06); /* ہلکا سا زوم ایفیکٹ */
+}
+
+/* بٹن کو امیج کے اوپر سب سے نیچے فٹ کرنے کی سیٹنگ */
+.mug-btn-wrapper {
+  position: absolute !important;
+  bottom: 25px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 85% !important;
+  z-index: 10 !important;
+}
+
+.mug-hover-btn {
+  display: block !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  padding: 14px 20px !important;
+  text-decoration: none !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  border: 1px solid #000000 !important;
+  transition: all 0.3s ease !important;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.mug-shop-now-text {
+  display: none !important;
+}
+
+/* ہوور (Hover) کرنے پر ٹیکسٹ اور کلر بدلنے کی لاجک */
+.mug-hover-btn:hover {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.mug-hover-btn:hover .mug-dynamic-title {
+  display: none !important;
+}
+
+.mug-hover-btn:hover .mug-shop-now-text {
+  display: inline-block !important;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Custom Product Banners",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Image"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title / Button Text",
+          "default": "MUG NAME"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link (Product URL)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Product Banners",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

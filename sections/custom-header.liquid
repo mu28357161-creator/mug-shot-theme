@@ -1,0 +1,302 @@
+<div class="custom-header-section">
+  
+  <!-- 1. اوپر والا ڈارک نیوی بلو اناؤنسمنٹ بار -->
+  <div class="custom-announcement-bar">
+    <div class="announcement-container">
+      <!-- سوشل میڈیا آئیکنز (بائیں طرف) -->
+      <div class="announcement-socials">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      </div>
+      
+      <!-- مین ٹیکسٹ (سینٹر میں) -->
+      <div class="announcement-text">
+        <span>{{ section.settings.announcement_text }}</span>
+      </div>
+      
+      <!-- کرنسی سلیکٹر پلے ہولڈر (دائیں طرف) -->
+      <div class="announcement-currency">
+        <div class="currency-dropdown">
+          <span class="flag-icon">🇱🇰</span> Sri Lankan Rupee <span class="arrow-down">▼</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. مین ہیڈر ایریا -->
+  <header class="main-navigation-header">
+    <div class="header-container">
+      
+      <!-- موبائل مینیو ہیمبرگر (صرف موبائل پر نظر آئے گا) -->
+      <button class="mobile-menu-trigger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- لوگو ایریا -->
+      <div class="header-logo-wrap">
+        <a href="{{ routes.root_url }}">
+          {% if section.settings.logo != blank %}
+            <img src="{{ section.settings.logo | img_url: '180x' }}" alt="{{ shop.name }}">
+          {% else %}
+            <span class="text-logo">{{ shop.name }}</span>
+          {% endif %}
+        </a>
+      </div>
+
+      <!-- نیویگیشن مینیو (لنکس) -->
+      <nav class="header-nav-menu">
+        <ul class="nav-links-list">
+          {% for link in linklists[section.settings.menu].links %}
+            <li>
+              <a href="{{ link.url }}" class="nav-link-item {% if link.active %}active-link{% endif %}">
+                {% if link.title contains 'HOME' or link.title contains 'Home' %}
+                  <!-- ہوم آئیکن صرف ہوم لنک کے ساتھ، جیسا تصویر میں ہے -->
+                  <svg class="home-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                {% endif %}
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <!-- رائٹ سائیڈ یوٹیلیٹی آئیکنز (سرچ، اکاؤنٹ، وش لسٹ، کارٹ) -->
+      <div class="header-icons-group">
+        <!-- سرچ آئیکن -->
+        <a href="{{ routes.search_url }}" class="icon-link-item search-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </a>
+        
+        <!-- اکاؤنٹ آئیکن -->
+        <a href="{{ routes.account_url }}" class="icon-link-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </a>
+        
+        <!-- وش لسٹ آئیکن (بیڈج کے ساتھ) -->
+        <a href="/pages/wishlist" class="icon-link-item wishlist-btn-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="icon-badge">0</span>
+        </a>
+        
+        <!-- کارٹ آئیکن (بیڈج کے ساتھ) -->
+        <a href="{{ routes.cart_url }}" class="icon-link-item cart-btn-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="icon-badge">0</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+</div>
+
+<!-- فونٹ اسم آئیکنز لوڈ کرنے کے لیے سوشل میڈیا کٹ -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+/* 1. اناؤنسمنٹ بار کی اسٹائلنگ */
+.custom-announcement-bar {
+  background-color: #1d2238; /* تصویر والا گہرا نیوی بلو کلر */
+  color: #ffffff;
+  padding: 10px 40px;
+  font-family: 'Assistant', sans-serif;
+}
+.announcement-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.announcement-socials {
+  display: flex;
+  gap: 15px;
+}
+.announcement-socials a {
+  color: #ffffff;
+  font-size: 13px;
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.announcement-socials a:hover { opacity: 1; }
+
+.announcement-text {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.announcement-currency {
+  font-size: 12px;
+}
+.currency-dropdown {
+  background: rgba(255,255,255,0.1);
+  padding: 5px 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 2. مین ہیڈر نیویگیشن کی اسٹائلنگ */
+.main-navigation-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 15px 40px;
+  font-family: 'Assistant', sans-serif;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* لوگو سائز کنٹرول */
+.header-logo-wrap img {
+  display: block;
+  max-height: 60px;
+  object-fit: contain;
+}
+.text-logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1d2238;
+  text-transform: uppercase;
+}
+
+/* مینیو لنکس الائنمنٹ (ایک لائن میں فلیٹ سیٹنگ) */
+.header-nav-menu {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+.nav-links-list {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+.nav-link-item {
+  text-decoration: none;
+  color: #4a5368;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.nav-link-item:hover, .active-link {
+  color: #1d2238;
+}
+.home-svg-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* آئیکنز گروپ اور بلیک ہولو بیڈجز (0 والے سرکلز) */
+.header-icons-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.icon-link-item {
+  color: #1d2238;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.icon-link-item svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5;
+}
+
+/* بلیک بیڈج ڈیزائن بلیک گراؤنڈ سرکل کے ساتھ جیسا تصویر میں ہے */
+.icon-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: bold;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3. موبائل رسپونسیو ہیمبرگر */
+.mobile-menu-trigger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.mobile-menu-trigger span {
+  width: 22px;
+  height: 2px;
+  background: #1d2238;
+  display: block;
+}
+
+/* موبائل ویو ایڈجسٹمنٹ */
+@media (max-width: 991px) {
+  .announcement-socials, .announcement-currency { display: none; }
+  .announcement-container { justify-content: center; }
+  .header-nav-menu { display: none; } /* ڈیفالٹ مینیو چھپے گا */
+  .mobile-menu-trigger { display: flex; }
+  .main-navigation-header { padding: 15px 20px; }
+  .custom-announcement-bar { padding: 8px 20px; }
+}
+</style>
+{% schema %}
+{
+  "name": "Custom Premium Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement Text",
+      "default": "FREE DELIVERY ABOVE RS 10,000"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Select Header Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Select Navigation Menu",
+      "default": "main-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Premium Header"
+    }
+  ]
+}
+{% endschema %}

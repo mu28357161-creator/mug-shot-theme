@@ -3272,3 +3272,36 @@ header-drawer {
 .multicolumn-list__item.multicolumn-card:hover .multicolumn-card__image-wrapper img {
   transform: scale(1.08) !important;
 }
+/* سلائیڈ شو کے بٹن کو کالا اور ٹیکسٹ کو پرفیکٹ سفید و موٹا کرنا */
+.slideshow__text.banner__text, 
+.slideshow__text .banner__heading {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4) !important;
+}
+/* ہر قسم کے بینر اور سلائیڈ شو کے بٹن کو کالا کرنے کے لیے */
+.banner__buttons a.button, 
+.slideshow__buttons a.button,
+.button--primary {
+  background-color: #1c1d2d !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ٹیکسٹ کو موٹا اور سفید کرنے کے لیے */
+.banner__heading, 
+.slideshow__text h2,
+.banner__text span {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+}
+
+/* بٹن ہوور ایفیکٹ */
+.banner__buttons a.button:hover,
+.slideshow__buttons a.button:hover {
+  background-color: #000000 !important;
+  transform: scale(1.05);
+}

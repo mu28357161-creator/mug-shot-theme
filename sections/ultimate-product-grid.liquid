@@ -1,0 +1,184 @@
+<div class="ultimate-grid-wrapper">
+  <!-- 1. ہیڈنگ اور پیراگراف (دونوں طرف لائنز کے ساتھ) -->
+  <div class="ultimate-header">
+    <h2 class="ultimate-heading"><span>{{ section.settings.heading }}</span></h2>
+    <p class="ultimate-subtext">{{ section.settings.subtext }}</p>
+  </div>
+
+  <!-- 2. فلٹر بٹنز (گول بارڈر اور ایکٹیو اسٹیٹ کے ساتھ) -->
+  <div class="ultimate-filters">
+    <button class="filter-btn active">{{ section.settings.tab_1 }}</button>
+    <button class="filter-btn">{{ section.settings.tab_2 }}</button>
+  </div>
+
+  <!-- 3. پروڈکٹ گرڈ (3 کالمز) -->
+  <div class="ultimate-grid">
+    {%- for block in section.blocks -%}
+      <div class="ultimate-card">
+        <div class="ultimate-image-box">
+          <!-- ڈسکاؤنٹ بیج (تصویر کے مطابق اورنج شیڈ) -->
+          {%- if block.settings.discount != blank -%}
+            <span class="discount-badge">{{ block.settings.discount }}</span>
+          {%- endif -%}
+
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: '800x' }}" class="main-img" alt="{{ block.settings.title }}">
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+
+          <!-- ڈارک اوورلے جو ہوور پر آئے گا -->
+          <div class="image-overlay"></div>
+
+          <!-- سائیڈ آئیکنز (شروع میں چھپے ہوئے، ہوور پر دائیں سے اندر آئیں گے) -->
+          <div class="hover-icons">
+            <button class="icon-sq" aria-label="Add to Wishlist">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            </button>
+            <button class="icon-sq" aria-label="Quick View">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+
+          <!-- کوئیک شاپ بٹن (شروع میں نیچے چھپا ہوا، ہوور پر سلائیڈ ہو کر اوپر آئے گا) -->
+          <div class="quick-shop-wrap">
+            <a href="{{ block.settings.link }}" class="qs-btn">QUICK SHOP</a>
+          </div>
+        </div>
+
+        <!-- پروڈکٹ کی تفصیلات اور قیمتیں -->
+        <div class="ultimate-info">
+          <h3 class="product-title">{{ block.settings.title }}</h3>
+          <p class="price-row">
+            {%- if block.settings.old_price != blank -%}
+              <span class="old-price">{{ block.settings.old_price }}</span>
+            {%- endif -%}
+            <span class="new-price">{{ block.settings.price }}</span>
+          </p>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+<style>
+/* مین کنٹینر */
+.ultimate-grid-wrapper { padding: 50px 20px; max-width: 1240px; margin: 0 auto; text-align: center; font-family: sans-serif; }
+
+/* ہیڈنگ کے دائیں بائیں پریمیم لائنز */
+.ultimate-heading {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; letter-spacing: 3px; margin-bottom: 12px; color: #333; text-transform: uppercase; font-weight: 500;
+}
+.ultimate-heading::before, .ultimate-heading::after {
+  content: ""; flex: 0 1 120px; border-bottom: 1px solid #ccc;
+}
+.ultimate-heading span { padding: 0 20px; }
+
+.ultimate-subtext { color: #777; margin-bottom: 35px; font-size: 14px; }
+
+/* فلٹر ٹیب بٹنز کا پرفیکٹ ڈیزائن */
+.ultimate-filters { display: flex; justify-content: center; gap: 15px; margin-bottom: 45px; }
+.filter-btn {
+  padding: 10px 32px; border: 1px solid #ccc; background: transparent;
+  border-radius: 30px; cursor: pointer; transition: all 0.3s ease; font-size: 14px; color: #444; font-weight: 500;
+}
+.filter-btn.active { border-color: #000; background: transparent; color: #000; font-weight: bold; box-shadow: inset 0 0 0 0.5px #000; }
+.filter-btn:hover:not(.active) { border-color: #000; color: #000; }
+
+/* 3 کالم گرڈ لے آؤٹ */
+.ultimate-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+/* امیج باکس اور ہوور ایفیکٹس */
+.ultimate-card { position: relative; text-align: center; }
+.ultimate-image-box { position: relative; overflow: hidden; background: #ffffff; width: 100%; }
+
+/* تصویر کا نارمل ویو (بالکل صاف) */
+.main-img { width: 100%; height: auto; display: block; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+
+/* ہوور پر امیج کا ہلکا سا زوم ہونا */
+.ultimate-card:hover .main-img { transform: scale(1.05); }
+
+/* ہوور کا کالا دھندلا شیڈ (Overlay) جو بٹنز کو واضح کرے گا */
+.image-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.04); opacity: 0; transition: opacity 0.4s ease; z-index: 1; pointer-events: none;
+}
+.ultimate-card:hover .image-overlay { opacity: 1; }
+
+/* سائیڈ آئیکنز (دل اور آنکھ) - شروع میں دائیں طرف باہر چھپے ہوئے */
+.hover-icons {
+  position: absolute; top: 20px; right: -60px; 
+  display: flex; flex-direction: column; gap: 10px; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 2;
+}
+/* ہوور ہونے پر دائیں سے سلائیڈ ہو کر اندر آئیں گے */
+.ultimate-card:hover .hover-icons { right: 20px; }
+
+.icon-sq {
+  width: 42px; height: 42px; background: #ffffff; border: none; border-radius: 50%;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08); cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: #333; transition: all 0.2s ease;
+}
+.icon-sq:hover { background: #000000; color: #ffffff; }
+
+/* کوئیک شاپ بٹن - شروع میں نیچے تصویر سے باہر چھپا ہوا */
+.quick-shop-wrap {
+  position: absolute; bottom: -60px; left: 0; width: 100%; 
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 2;
+}
+/* ہوور ہونے پر نیچے سے اوپر سلائیڈ کرے گا */
+.ultimate-card:hover .quick-shop-wrap { bottom: 0; }
+
+.qs-btn {
+  display: block; background: #1c2434; color: #ffffff; padding: 16px;
+  text-decoration: none; font-size: 13px; font-weight: bold; letter-spacing: 1.5px; transition: background 0.3s;
+}
+.qs-btn:hover { background: #000000; }
+
+/* پروڈکٹ انفارمیشن اور ٹیکسٹ الائنمنٹ */
+.ultimate-info { padding: 15px 5px; text-align: center; }
+.product-title { font-size: 14px; font-weight: 600; margin: 0 0 8px 0; color: #222; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.4; }
+.price-row { font-size: 14px; margin: 0; }
+.old-price { text-decoration: line-through; color: #999; margin-right: 8px; font-weight: 400; }
+.new-price { color: #f25a5a; font-weight: 600; }
+
+/* نارنجی رنگ کا ڈسکاؤنٹ بیج */
+.discount-badge {
+  position: absolute; top: 15px; left: 15px; background: #f37b53;
+  color: #fff; padding: 4px 10px; font-size: 12px; font-weight: bold; z-index: 2;
+}
+
+/* موبائل اسکرین ریسپونسیو سیٹنگ */
+@media (max-width: 768px) { 
+  .ultimate-grid { grid-template-columns: 1fr; gap: 30px; } 
+  .hover-icons { right: 20px; } /* موبائل پر شروعات سے ہی دکھا سکتے ہیں یا چھپا سکتے ہیں */
+  .quick-shop-wrap { bottom: 0; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Ultimate Product Grid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Section Heading", "default": "OUR PRODUCTS" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Discover our latest collection of personalized gifts and mugs tailored just for you." },
+    { "type": "text", "id": "tab_1", "label": "Tab 1 Title", "default": "Best Seller" },
+    { "type": "text", "id": "tab_2", "label": "Tab 2 Title", "default": "Featured" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product Image" },
+        { "type": "text", "id": "title", "label": "Product Title", "default": "BATMAN GIFT BOX" },
+        { "type": "text", "id": "old_price", "label": "Old Price (Optional)", "default": "Rs 9,200.00" },
+        { "type": "text", "id": "price", "label": "Sale Price", "default": "Rs 7,200.00" },
+        { "type": "text", "id": "discount", "label": "Discount Badge (e.g. -22%)", "default": "-22%" },
+        { "type": "url", "id": "link", "label": "Product Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Ultimate Product Grid" }]
+}
+{% endschema %}

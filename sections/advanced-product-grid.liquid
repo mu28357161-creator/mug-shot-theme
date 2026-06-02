@@ -1,0 +1,101 @@
+<div class="adv-grid-container">
+  <div class="adv-grid">
+    {%- for block in section.blocks -%}
+      <div class="adv-card">
+        <div class="adv-image-wrapper">
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: '800x' }}" class="adv-img">
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+
+          <div class="adv-icons">
+            <button class="icon-btn"><i class="heart-icon">♥</i></button>
+            <button class="icon-btn"><i class="eye-icon">👁</i></button>
+          </div>
+
+          <div class="adv-button-wrapper">
+            <a href="{{ block.settings.link }}" class="quick-shop-btn">QUICK SHOP</a>
+          </div>
+        </div>
+        
+        <div class="adv-info">
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.price }}</p>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+<style>
+.adv-grid-container { padding: 40px; max-width: 1300px; margin: 0 auto; }
+.adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+
+/* کارڈ اور تصویر کی سیٹنگ */
+.adv-card { position: relative; text-align: center; cursor: pointer; }
+.adv-image-wrapper { position: relative; overflow: hidden; background: #f3f3f3; }
+.adv-img { width: 100%; display: block; transition: transform 0.5s ease; }
+
+/* ہوور ایفیکٹ - امیج زوم */
+.adv-card:hover .adv-img { transform: scale(1.1); }
+
+/* ٹاپ رائٹ آئیکنز کی سیٹنگ */
+.adv-icons {
+  position: absolute; top: 15px; right: -50px; /* شروع میں باہر ہوں گے */
+  display: flex; flex-direction: column; gap: 8px;
+  transition: right 0.3s ease; z-index: 5;
+}
+.adv-card:hover .adv-icons { right: 15px; } /* ہوور پر اندر آئیں گے */
+
+.icon-btn {
+  background: white; border: none; border-radius: 50%;
+  width: 35px; height: 35px; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* کوئیک شاپ بٹن کی سیٹنگ */
+.adv-button-wrapper {
+  position: absolute; bottom: -60px; left: 0; width: 100%;
+  transition: bottom 0.3s ease; z-index: 5;
+}
+.adv-card:hover .adv-button-wrapper { bottom: 0; }
+
+.quick-shop-btn {
+  display: block; background: #1a233a; color: white;
+  padding: 15px; text-decoration: none; font-size: 12px; font-weight: bold;
+}
+
+/* نام اور قیمت */
+.adv-info h3 { font-size: 14px; margin: 15px 0 5px; text-transform: uppercase; }
+.adv-info p { color: #666; font-size: 14px; }
+
+/* موبائل کے لیے سیٹنگ */
+@media (max-width: 768px) {
+  .adv-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Advanced Product Grid",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Product Name" },
+        { "type": "text", "id": "price", "label": "Price", "default": "Rs. 1,000" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Advanced Product Grid"
+    }
+  ]
+}
+{% endschema %}
