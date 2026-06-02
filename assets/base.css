@@ -3147,3 +3147,128 @@ details-disclosure > details {
     100% { transform: rotate(360deg) translateX(1em) rotate(-360deg) scale(1.2); }
   }
 }
+/* ۱. ڈیسک ٹاپ پر سامنے نظر آنے والے مینیو لنکس کو چھپانا */
+@media screen and (min-width: 990px) {
+  .header__inline-menu {
+    display: none !important;
+  }
+
+  /* ۲. ڈیسک ٹاپ پر بھی تین لائنوں والے (Hamburger) مینیو کو زبردستی دکھانا */
+  .header__icon--menu {
+    display: flex !important;
+  }
+}
+
+/* ۳. لوگو کو مینیو آئیکن کے بعد بائیں طرف سیٹ کرنا */
+.header {
+  grid-template-areas: 'left-icon heading icons' !important;
+  grid-template-columns: 1fr 2fr 1fr !important;
+  align-items: center !important;
+}
+
+header-drawer {
+  display: block !important;
+}
+/* مینیو کو دوبارہ سامنے دکھانے کے لیے */
+@media screen and (min-width: 990px) {
+  .header__inline-menu {
+    display: block !important;
+  }
+  .header__icon--menu {
+    display: none !important;
+  }
+}
+
+/* مینیو لنکس کو خوبصورت اور کالا کرنے کے لیے */
+.header__menu-item {
+  color: #000000 !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  font-size: 1.4rem !important;
+}
+/* لوگو اور مینیو کو ایک لائن میں ترتیب دینا اور مینیو کو سینٹر کرنا */
+@media screen and (min-width: 990px) {
+  .header {
+    grid-template-columns: auto 1fr auto !important; /* لوگو بائیں طرف اور مینیو کے لیے جگہ */
+    gap: 4rem !important;
+  }
+  
+  .header__inline-menu {
+    display: flex !important;
+    justify-content: center !important; /* مینیو کو بالکل سینٹر میں لانے کے لیے */
+    width: 100% !important;
+  }
+}
+/* بینر کے ٹیکسٹ اور بٹن کو سیٹ کرنا */
+.banner__content {
+  text-align: center !important;
+}
+
+.banner__heading {
+  font-weight: 800 !important;
+  letter-spacing: 0.2rem !important;
+}
+
+.button--primary {
+  background-color: #2c3e50 !important; /* بٹن کا گہرا رنگ */
+  color: #ffffff !important;
+  border: none !important;
+}
+/* ۱. پورے کالم کو پوزیشن دینا تاکہ ٹیکسٹ تصویر کے اندر آئے */
+.multicolumn-list__item.multicolumn-card {
+  position: relative !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+/* ۲. تصویر کے نیچے والی سفید سپیس ختم کرنا */
+.multicolumn-card__info {
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
+  padding: 0 !important;
+  text-align: center !important;
+  z-index: 3 !important;
+}
+
+/* ۳. ڈیفالٹ ہیڈنگ (جو تصویر کے نیچے ہے) کو چھپانا */
+.multicolumn-card__info .inline-richtext {
+  display: none !important;
+}
+
+/* ۴. لنک کو تصویر کے اوپر ایک خوبصورت سفید بٹن بنانا */
+.multicolumn-card__info .link {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  padding: 10px 25px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1rem !important;
+  text-decoration: none !important;
+  font-size: 1.3rem !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+  display: inline-block !important;
+  transition: all 0.3s ease !important;
+}
+
+/* ۵. بٹن پر ماؤس لے جانے کا ہوور ایفیکٹ */
+.multicolumn-card__info .link:hover {
+  background-color: #f0f0f0 !important;
+  transform: scale(1.05) !important;
+}
+
+/* ۶. تصویر کو ہوور پر اسموتھ زوم کرنے کا ایفیکٹ */
+.multicolumn-card__image-wrapper {
+  overflow: hidden !important;
+}
+
+.multicolumn-card__image-wrapper img {
+  transition: transform 0.6s ease-in-out !important;
+}
+
+/* جب ڈبے پر ماؤس جائے گا تو تصویر زوم ہوگی */
+.multicolumn-list__item.multicolumn-card:hover .multicolumn-card__image-wrapper img {
+  transform: scale(1.08) !important;
+}
