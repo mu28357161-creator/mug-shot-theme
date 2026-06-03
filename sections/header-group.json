@@ -13,7 +13,6 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "disabled": true,
       "blocks": {
         "announcement-bar-0": {
           "type": "announcement",
@@ -28,6 +27,7 @@
       "block_order": [
         "announcement-bar-0"
       ],
+      "disabled": true,
       "settings": {}
     },
     "header": {
@@ -39,7 +39,7 @@
         "logo_position": "middle-center",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
-        "sticky_header_type": "always",
+        "sticky_header_type": "none",
         "show_line_separator": true,
         "color_scheme": "inverse",
         "enable_country_selector": false,
@@ -49,10 +49,66 @@
         "padding_top": 8,
         "padding_bottom": 8
       }
+    },
+    "advanced_product_grid_wE3VP8": {
+      "type": "advanced-product-grid",
+      "blocks": {
+        "product_hj8gb8": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/IMG_3251_1.webp",
+            "title": "Product Name",
+            "price": "Rs. 1,000",
+            "link": ""
+          }
+        },
+        "product_9BADfm": {
+          "type": "product",
+          "settings": {
+            "title": "Product Name",
+            "price": "Rs. 1,000",
+            "link": ""
+          }
+        },
+        "product_TYchLw": {
+          "type": "product",
+          "settings": {
+            "title": "Product Name",
+            "price": "Rs. 1,000",
+            "link": ""
+          }
+        },
+        "product_xmMdBR": {
+          "type": "product",
+          "settings": {
+            "title": "Product Name",
+            "price": "Rs. 1,000",
+            "link": ""
+          }
+        },
+        "product_3V4KHP": {
+          "type": "product",
+          "settings": {
+            "title": "Product Name",
+            "price": "Rs. 1,000",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_hj8gb8",
+        "product_9BADfm",
+        "product_TYchLw",
+        "product_xmMdBR",
+        "product_3V4KHP"
+      ],
+      "name": "Advanced Product Grid",
+      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "advanced_product_grid_wE3VP8"
   ]
 }
